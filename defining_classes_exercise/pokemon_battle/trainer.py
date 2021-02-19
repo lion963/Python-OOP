@@ -1,5 +1,3 @@
-from defining_classes_exercise.pokemon_battle.pokemon import Pokemon
-
 class Trainer():
 
     def __init__(self, name):
@@ -20,4 +18,4 @@ class Trainer():
         return f'Pokemon is not caught'
 
     def trainer_data(self):
-        return f"Pokemon Trainer {self.name}\nPokemon count {len(self.pokemon)}\n- {'- '.join([pokemon_obj.pokemon_details() for pokemon_obj in self.pokemon])}"
+        return f"Pokemon Trainer {self.name}\nPokemon count {len(self.pokemon)}\n- {''.join([pokemon_obj.pokemon_details() for pokemon_obj in self.pokemon])}"
