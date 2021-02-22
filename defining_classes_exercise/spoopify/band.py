@@ -21,4 +21,4 @@ class Band():
         return f"Album {album_name} is not found"
 
     def details(self):
-        return f"Band {self.name}\n"+'\n'.join([album.details() for album in self.albums])
+        return f"Band {self.name}\n"+''.join([album.details() for album in self.albums])

@@ -9,7 +9,7 @@ class Song():
         self.single=single
 
     def get_info(self):
-        return f"{self.name} – {self.length}"
+        return f"{self.name} – {self.length}\n"
 
 song = Song("Running in the 90s", 3.45, False)
 print(song.get_info())
