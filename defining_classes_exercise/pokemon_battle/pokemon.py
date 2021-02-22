@@ -1,5 +1,6 @@
 from defining_classes_exercise.pokemon_battle.trainer import Trainer
 
+
 class Pokemon():
     def __init__(self, name, health):
         self.name = name
