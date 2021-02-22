@@ -20,7 +20,7 @@ class Player():
     def player_info(self):
         skill_list = ['===' + key + ' – ' + str(value) for key, value in self.skills.items()]
         return f'Name: {self.name}\nGuild: {self.guild}\nHP: {self.hp}\nMP: {self.mp}\n' + '\n'.join(
-            skill_list) + f"\n"
+            skill_list)
 
 
 player = Player("George", 50, 100)
