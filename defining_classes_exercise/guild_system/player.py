@@ -1,7 +1,7 @@
 from defining_classes_exercise.guild_system.guild import Guild
 
 
-class Player:
+class Player():
 
     def __init__(self, name, hp, mp):
         self.name = name
