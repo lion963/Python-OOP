@@ -18,4 +18,4 @@ class Trainer():
         return f'Pokemon is not caught'
 
     def trainer_data(self):
-        return f"Pokemon Trainer {self.name}\nPokemon count {len(self.pokemon)}\n" + '\n'.join(['- '+pokemon_obj.pokemon_details() for pokemon_obj in self.pokemon])
+        return f"Pokemon Trainer {self.name}\nPokemon count {len(self.pokemon)}\n" + '\n'.join(['- '+pokemon_obj.pokemon_details() for pokemon_obj in self.pokemon])  + f"\n"
