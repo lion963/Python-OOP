@@ -11,11 +11,9 @@ class Pokemon():
 
 
 pokemon = Pokemon("Pikachu", 90)
-proba = Pokemon('Proba', 100)
 print(pokemon.pokemon_details())
 trainer = Trainer("Ash")
 print(trainer.add_pokemon(pokemon))
-print(trainer.add_pokemon(proba))
 second_pokemon = Pokemon("Charizard", 110)
 print(trainer.add_pokemon(second_pokemon))
 print(trainer.release_pokemon("Pikachu"))
