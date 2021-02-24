@@ -17,23 +17,16 @@ class Player():
         else:
             return f'Skill already added'
 
-    def skill_list(self):
-        list = []
-        for key, value in self.skills.items():
-            list.append(f'==={key} – {value}\n')
-        return list
-
     def player_info(self):
-        return f'Name: {self.name}\nGuild: {self.guild}\nHP: {self.hp}\nMP: {self.mp}\n' + ''.join(self.skill_list())
+        result = f'Name: {self.name}\nGuild: {self.guild}\nHP: {self.hp}\nMP: {self.mp}\n'
+        for key, value in self.skills.items():
+            result += f'==={key} - {value}\n'
+        return result
+
 
 player = Player("George", 50, 100)
-player2 = Player("Asen", 50, 100)
 print(player.add_skill("Shield Break", 20))
-# print(player.add_skill("Jumping", 30))
 print(player.player_info())
 guild = Guild("UGT")
-# guild1 = Guild("Proba")
 print(guild.assign_player(player))
-# print(guild1.assign_player(player))
-# print(guild.kick_player('adfadf'))
 print(guild.guild_info())

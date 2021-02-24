@@ -22,4 +22,7 @@ class Guild():
         return f'Player {player_name} is not in the guild.'
 
     def guild_info(self):
-        return ''.join([player.player_info() for player in self.players])
+        result = f"Guild: {self.name}\n"
+        for player in self.players:
+            result += f"{player.player_info()}"
+        return result
