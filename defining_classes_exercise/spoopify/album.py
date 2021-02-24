@@ -32,4 +32,7 @@ class Album():
         return f"Album {self.name} has been published."
 
     def details(self):
-        return f"Album {self.name}\n"+''.join(['== '+song.get_info() for song in self.songs])
+        result = f"Album {self.name}\n"
+        for song in self.songs:
+            result += f"== {song.get_info()}\n"
+        return result
