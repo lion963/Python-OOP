@@ -8,18 +8,19 @@ from encapsulation_exercise.wild_cat_zoo.vet import Vet
 
 class Zoo:
 
-    def __init__(self, name, budget, animlal_capacity, workers_capacity):
+    def __init__(self, name, budget, animal_capacity, workers_capacity):
         self.name = name
         self.__budget = budget
-        self.__animlal_capacity = animlal_capacity
+        self.__animal_capacity = animal_capacity
         self.__workers_capacity = workers_capacity
         self.animals = []
         self.workers = []
 
     def add_animal(self, animal, price):
         if self.__budget >= price:
-            if len(self.animals) < self.__animlal_capacity:
+            if len(self.animals) < self.__animal_capacity:
                 self.animals.append(animal)
+                self.__budget-=price
                 return f"{animal.name} the {animal.__class__.__name__} added to the zoo"
             return f"Not enough space for animal"
         return f"Not enough budget"
@@ -35,7 +36,7 @@ class Zoo:
             if worker.name == worker_name:
                 self.workers.remove(worker)
                 return f"{worker_name} fired successfully"
-        return "There is no {worker_name} in the zoo"
+        return f"There is no {worker_name} in the zoo"
 
     def pay_workers(self):
         amount = 0
@@ -47,7 +48,7 @@ class Zoo:
         return "You have no budget to pay your workers. They are unhappy"
 
     def tend_animals(self):
-        amount = sum(prices[:len(self.animals)])
+        amount=0
         for animal in self.animals:
             amount += animal.get_needs()
         if self.__budget >= amount:
