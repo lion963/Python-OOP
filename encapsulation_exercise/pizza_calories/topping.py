@@ -1,4 +1,4 @@
-class Toppings:
+class Topping:
 
     def __init__(self, topping_type, weight):
         self.__topping_type = topping_type
