@@ -5,7 +5,7 @@ class Dog(Animal):
     def bark(self):
         return "barking..."
 
-# dog = Dog()
-# print(dog.eat())
-# print(dog.bark())
+dog = Dog()
+print(dog.eat())
+print(dog.bark())
 
