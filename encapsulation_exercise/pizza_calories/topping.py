@@ -4,14 +4,18 @@ class Topping:
         self.__topping_type = topping_type
         self.__weight = weight
 
-    def get_topping_type(self):
+    @property
+    def topping_type(self):
         return self.__topping_type
 
-    def get_weight(self):
+    @property
+    def weight(self):
         return self.__weight
 
-    def set_topping_type(self, topping_type):
+    @topping_type.setter
+    def topping_type(self, topping_type):
         self.__topping_type = topping_type
 
-    def set_weight(self, weight):
+    @weight.setter
+    def weight(self, weight):
         self.__weight = weight

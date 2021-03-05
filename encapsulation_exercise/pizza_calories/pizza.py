@@ -10,41 +10,45 @@ class Pizza:
         self.__toppings_capacity = toppings_capacity
         self.__toppings = {}
 
-    def get_name(self):
+    @property
+    def name(self):
         return self.__name
 
-    def set_name(self, name):
+    @name.setter
+    def name(self, name):
         self.__name = name
 
-    def get_dough(self):
+    @property
+    def dough(self):
         return self.__dough
 
-    def set_dough(self, dough):
+    @dough.setter
+    def dough(self, dough):
         self.__dough = dough
 
-    def get_toppings_capacity(self):
+    @property
+    def toppings_capacity(self):
         return self.__toppings_capacity
 
-    def set_toppings_capacity(self, toppings_capacity):
+    @toppings_capacity.setter
+    def toppings_capacity(self, toppings_capacity):
         self.__toppings_capacity = toppings_capacity
 
-    def get_toppings(self):
-        return self.__toppings
     @property
     def toppings(self):
         return self.__toppings
 
-    def set_toppings(self, toppings):
+    @toppings.setter
+    def toppings(self, toppings):
         self.__toppings = toppings
 
     def add_topping(self, topping):
         if len(self.__toppings) < self.__toppings_capacity:
-            if topping.get_topping_type() not in self.__toppings:
-                self.__toppings[topping.get_topping_type()] = 0
-            self.__toppings[topping.get_topping_type()] += topping.get_weight()
+            if topping.topping_type not in self.__toppings:
+                self.__toppings[topping.topping_type] = 0
+            self.__toppings[topping.topping_type] += topping.weight
             return
         raise ValueError("Not enough space for another topping")
 
     def calculate_total_weight(self):
-        return sum([value for value in self.get_toppings().values()])
-# + self.__dough.get_weight()
+        return sum([value for value in self.toppings.values()])
