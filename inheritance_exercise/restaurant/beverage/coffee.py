@@ -4,8 +4,8 @@ class Coffee(HotBeverage):
     __MILLILITERS = 50
     __PRICE = 3.50
 
-    def __init__(self, name, price, milliliters, caffeine: float):
-        super().__init__(name, price, milliliters)
+    def __init__(self, name, caffeine):
+        super().__init__(name, Coffee.__PRICE, Coffee.__MILLILITERS)
         self.__caffeine = caffeine
 
     @property
@@ -19,3 +19,5 @@ class Coffee(HotBeverage):
     @property
     def PRICE(self):
         return self.__PRICE
+
+

@@ -2,7 +2,7 @@ from inheritance_exercise.restaurant.product import Product
 
 class Beverage(Product):
 
-    def __init__(self, name, price, milliliters: float):
+    def __init__(self, name, price, milliliters):
         super().__init__(name, price)
         self.__milliliters = milliliters
 

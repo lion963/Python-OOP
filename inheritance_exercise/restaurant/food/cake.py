@@ -5,8 +5,8 @@ class Cake(Dessert):
     __CALORIES = 1000
     __PRICE = 5
 
-    def __init__(self, name, price, grams, calories):
-        super().__init__(name, price, grams, calories)
+    def __init__(self, name):
+        super().__init__(name, Cake.__PRICE, Cake.__GRAMS, Cake.__CALORIES)
 
     @property
     def GRAMS(self):
