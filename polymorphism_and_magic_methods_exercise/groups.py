@@ -4,7 +4,8 @@ class Person:
         self.surname = surname
 
     def __add__(self, other):
-        return Person(self.name, other.surname)
+        new_obj=Person(self.name, other.surname)
+        return new_obj
 
     def __repr__(self):
         return f"{self.name} {self.surname}"
@@ -25,11 +26,14 @@ class Group:
         return f"Group {self.name} with members {', '.join(name_list)}"
 
     def __add__(self, other):
-        name_list_2 = []
-        common_list_person = self.people + other.people
-        for i in range(len(common_list_person)):
-            name_list_2.append(f"Person {i}: {common_list_person[i].name} {common_list_person[i].surname}")
-        return name_list_2
+        list1=self.people+other.people
+        name_list=[f"Person {i}: {str(list1[i])}" for i in range(len(list1))]
+        new_obj=Group(f"{self.name}&{other.name}", name_list)
+        return new_obj
+
+    def __getitem__(self, index):
+        return self.people[index]
+
 
 
 p0 = Person('Aliko', 'Dangote')
