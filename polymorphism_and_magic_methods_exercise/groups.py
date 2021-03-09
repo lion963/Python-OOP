@@ -1,39 +1,42 @@
+import itertools
+
+
 class Person:
-    def __init__(self, name, surname):
+    new_id = itertools.count()
+
+    def __init__(self, name: str, surname: str):
         self.name = name
         self.surname = surname
+        self.id = next(Person.new_id)
 
     def __add__(self, other):
-        new_obj=Person(self.name, other.surname)
-        return new_obj
+        return Person(self.name, other.surname)
 
     def __repr__(self):
+        return f"Person {self.id}: {self.name} {self.surname}"
+
+    def __str__(self):
         return f"{self.name} {self.surname}"
 
 
 class Group:
-    def __init__(self, name, people):
-        self.people = people
+    def __init__(self, name: str, people: list):
         self.name = name
+        self.people = people
 
     def __len__(self):
         return len(self.people)
 
-    def __repr__(self):
-        name_list = []
-        for p in self.people:
-            name_list.append(str(p))
-        return f"Group {self.name} with members {', '.join(name_list)}"
-
     def __add__(self, other):
-        list1=self.people+other.people
-        name_list=[f"Person {i}: {str(list1[i])}" for i in range(len(list1))]
-        new_obj=Group(f"{self.name}&{other.name}", name_list)
-        return new_obj
+        list1 = self.people + other.people
+        return Group(f"{self.name}&{other.name}", list1)
 
     def __getitem__(self, index):
         return self.people[index]
 
+    def __str__(self):
+        members = ", ".join(person.__str__() for person in self.people)
+        return f"Group {self.name} with members {members}"
 
 
 p0 = Person('Aliko', 'Dangote')
