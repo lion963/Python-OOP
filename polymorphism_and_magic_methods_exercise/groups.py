@@ -12,7 +12,7 @@ class Person:
     def __add__(self, other):
         return Person(self.name, other.surname)
 
-    def __repr__(self):
+    def __unicode__(self):
         return f"Person {self.id}: {self.name} {self.surname}"
 
     def __str__(self):
@@ -35,7 +35,7 @@ class Group:
         return self.people[index]
 
     def __str__(self):
-        members = ", ".join(person.__str__() for person in self.people)
+        members = ", ".join(str(person) for person in self.people)
         return f"Group {self.name} with members {members}"
 
 
@@ -55,3 +55,5 @@ print(third_group[0])
 
 for person in third_group:
     print(person)
+
+
