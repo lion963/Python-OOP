@@ -1,19 +1,11 @@
-import itertools
-
-
 class Person:
-    new_id = itertools.count()
 
     def __init__(self, name: str, surname: str):
         self.name = name
         self.surname = surname
-        self.id = next(Person.new_id)
 
     def __add__(self, other):
         return Person(self.name, other.surname)
-
-    def __unicode__(self):
-        return f"Person {self.id}: {self.name} {self.surname}"
 
     def __str__(self):
         return f"{self.name} {self.surname}"
@@ -28,11 +20,10 @@ class Group:
         return len(self.people)
 
     def __add__(self, other):
-        list1 = self.people + other.people
-        return Group(f"{self.name}&{other.name}", list1)
+        return Group(name=self.name, people=self.people + other.people)
 
-    def __getitem__(self, index):
-        return self.people[index]
+    def __getitem__(self, item):
+        return f"Person {item}: {self.people[item]}"
 
     def __str__(self):
         members = ", ".join(str(person) for person in self.people)
@@ -55,5 +46,3 @@ print(third_group[0])
 
 for person in third_group:
     print(person)
-
-
