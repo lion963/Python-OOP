@@ -69,11 +69,11 @@ class VehicleTests(unittest.TestCase):
 
     def test_refuel_method_raise(self):
         with self.assertRaises(Exception):
-            self.vehicle.refuel(10)
+            self.vehicle.refuel(10.0)
 
     def test_refuel_method(self):
         self.vehicle.drive(50)
-        self.vehicle.refuel(50)
+        self.vehicle.refuel(50.0)
         result = self.vehicle.fuel
         expected_result = 52.75
         self.assertEqual(result, expected_result)
