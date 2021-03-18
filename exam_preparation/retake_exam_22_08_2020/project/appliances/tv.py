@@ -1,0 +1,8 @@
+from exam_preparation.retake_exam_22_08_2020.project.appliances.appliance import Appliance
+
+
+class TV(Appliance):
+    COST = 1.5
+
+    def __init__(self):
+        super().__init__(cost=TV.COST)
