@@ -27,6 +27,6 @@ class Room:
                 if isinstance(obj, Appliance):
                     total_expenses += obj.get_monthly_expense()
                 elif isinstance(obj, Child):
-                    total_expenses += obj.cost
+                    total_expenses += obj.cost*30
         self.expenses = total_expenses
         return self.expenses
