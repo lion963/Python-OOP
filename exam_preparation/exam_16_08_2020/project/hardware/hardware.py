@@ -14,7 +14,8 @@ class Hardware:
         self.software_components = []
 
     def install(self, software: Software):
-        if self.capacity < sum([s.capacity_consumption for s in self.software_components]) + software.capacity_consumption \
+        if self.capacity < sum(
+                [s.capacity_consumption for s in self.software_components]) + software.capacity_consumption \
                 or self.memory < sum([s.memory_consumption for s in self.software_components]) + software.memory_consumption:
             raise UnsuccessfulInstallException('Software cannot be installed')
 
@@ -23,4 +24,3 @@ class Hardware:
     def uninstall(self, software: Software):
         if software in self.software_components:
             self.software_components.remove(software)
-
