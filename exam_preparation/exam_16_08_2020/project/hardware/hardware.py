@@ -23,3 +23,9 @@ class Hardware:
     def uninstall(self, software: Software):
         if software in self.software_components:
             self.software_components.remove(software)
+
+    def get_light_software_components_count(self):
+        return len([s for s in self.software_components if s.type == "Light"])
+
+    def get_express_software_components_count(self):
+        return len([s for s in self.software_components if s.type == "Express"])

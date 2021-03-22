@@ -66,36 +66,35 @@ class TestHardware(unittest.TestCase):
         expected_result = [light_software, light_software2]
         self.assertEqual(result, expected_result)
 
+    def test_light_components_count_method(self):
+        params = ['Linux', "Power", 50, 70]
+        hardware = Hardware(*params)
+        light_software = LightSoftware('SSD', 10, 20)
+        light_software2 = LightSoftware('SSD', 10, 20)
+        express_software = ExpressSoftware('HHD', 20, 25)
+        hardware.install(light_software)
+        hardware.install(light_software2)
+        hardware.install(express_software)
+        result = hardware.get_light_software_components_count()
+        expected_result = 2
+        self.assertEqual(result, expected_result)
+
+    def test_express_components_count_method(self):
+        params = ['Linux', "Power", 50, 70]
+        hardware = Hardware(*params)
+        light_software = LightSoftware('SSD', 10, 20)
+        light_software2 = LightSoftware('SSD', 10, 20)
+        express_software = ExpressSoftware('HHD', 20, 25)
+        hardware.install(light_software)
+        hardware.install(light_software2)
+        hardware.install(express_software)
+        result = hardware.get_express_software_components_count()
+        expected_result = 1
+        self.assertEqual(result, expected_result)
+
 
 if __name__ == '__main__':
     unittest.main()
 
 
-# class Hardware:
-#     def __init__(self, name, type, capacity, memory):
-#         self.name = name
-#         self.type = type
-#         self.capacity = capacity
-#         self.memory = memory
-#         self.software_components = []
-#
-#     def install(self, software):
-#         if self.can_install(software):
-#             self.software_components.append(software)
-#         else:
-#             raise Exception("Software cannot be installed")
-#
-#     def uninstall(self, software):
-#         self.software_components.remove(software)
-#
-#     def get_light_software_components_count(self):
-#         return len([s for s in self.software_components if s.type == "Light"])
-#
-#     def get_express_software_components_count(self):
-#         return len([s for s in self.software_components if s.type == "Express"])
-#
-#     def can_install(self, software):
-#         has_space = sum([s.capacity_consumption for s in self.software_components]) + software.capacity_consumption <= self.capacity
-#         has_memory = sum([s.memory_consumption for s in self.software_components]) + software.memory_consumption <= self.memory
-#         return has_memory and has_space
 
