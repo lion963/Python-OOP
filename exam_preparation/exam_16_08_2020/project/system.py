@@ -27,8 +27,8 @@ class System:
         try:
             hardware[0].install(express_software)
             System._software.append(express_software)
-        except Exception:
-            return "Software cannot be installed"
+        except Exception as ex:
+            return ex.args[0]
 
     @staticmethod
     def register_light_software(hardware_name, name, capacity_consumption, memory_consumption):
@@ -40,8 +40,8 @@ class System:
         try:
             hardware[0].install(light_software)
             System._software.append(light_software)
-        except Exception:
-            return "Software cannot be installed"
+        except Exception as ex:
+            return ex.args[0]
 
     @staticmethod
     def release_software_component(hardware_name, software_name):
