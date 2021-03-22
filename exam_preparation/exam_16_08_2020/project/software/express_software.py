@@ -5,4 +5,4 @@ class ExpressSoftware(Software):
     type = "Express"
 
     def __init__(self, name, capacity_consumption, memory):
-        super().__init__(name, type=ExpressSoftware.type, capacity_consumption=capacity_consumption, memory_consumption=memory * 2)
+        super().__init__(name, "Express", capacity_consumption=int(capacity_consumption), memory_consumption=int(memory * 2))

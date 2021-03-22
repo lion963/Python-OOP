@@ -1,3 +1,4 @@
+from exam_preparation.exam_16_08_2020.project.hardware.hardware import UnsuccessfulInstallException
 from exam_preparation.exam_16_08_2020.project.hardware.heavy_hardware import HeavyHardware
 from exam_preparation.exam_16_08_2020.project.hardware.power_hardware import PowerHardware
 from exam_preparation.exam_16_08_2020.project.software.express_software import ExpressSoftware
@@ -19,37 +20,42 @@ class System:
 
     @staticmethod
     def register_express_software(hardware_name, name, capacity_consumption, memory_consumption):
-        hardware = [hardware for hardware in System._hardware if hardware.name == hardware_name]
-        if not hardware:
-            return f"Hardware does not exist"
+        try:
+            hardware = [hardware for hardware in System._hardware if hardware.name == hardware_name][0]
+        except IndexError as ex:
+            return 'Hardware does not exist'
 
         express_software = ExpressSoftware(name, capacity_consumption, memory_consumption)
+
         try:
-            hardware[0].install(express_software)
+            hardware.install(express_software)
             System._software.append(express_software)
-        except Exception as ex:
-            return ex.args[0]
+        except UnsuccessfulInstallException as ex:
+            return 'Software cannot be installed'
 
     @staticmethod
     def register_light_software(hardware_name, name, capacity_consumption, memory_consumption):
-        hardware = [hardware for hardware in System._hardware if hardware.name == hardware_name]
-        if not hardware:
-            return f"Hardware does not exist"
+        try:
+            hardware = [hardware for hardware in System._hardware if hardware.name == hardware_name][0]
+        except IndexError as ex:
+            return 'Hardware does not exist'
 
         light_software = LightSoftware(name, capacity_consumption, memory_consumption)
+
         try:
-            hardware[0].install(light_software)
+            hardware.install(light_software)
             System._software.append(light_software)
-        except Exception as ex:
-            return ex.args[0]
+        except UnsuccessfulInstallException as ex:
+            return 'Software cannot be installed'
 
     @staticmethod
     def release_software_component(hardware_name, software_name):
-        hardware = [hardware for hardware in System._hardware if hardware.name == hardware_name]
-        software = [software for software in System._software if software.name == software_name]
-        if not hardware and not software:
-            return f"Some of the components do not exist"
-        hardware[0].uninstall(software[0])
+        try:
+            hardware = [hardware for hardware in System._hardware if hardware.name == hardware_name][0]
+            software = [software for software in System._software if software.name == software_name][0]
+            hardware.uninstall(software)
+        except IndexError as ex:
+            return 'Some of the components do not exist'
 
     @staticmethod
     def analyze():
@@ -75,8 +81,7 @@ class System:
         result = ''
 
         for hardware in System._hardware:
-            express_software_comps_count = len(
-                [comp for comp in hardware.software_components if comp.type == 'Express'])
+            express_software_comps_count = len([comp for comp in hardware.software_components if comp.type == 'Express'])
             light_software_comps_count = len([comp for comp in hardware.software_components if comp.type == 'Light'])
             total_memory_used = sum([comp.memory_consumption for comp in hardware.software_components])
             total_capacity_used = sum([comp.capacity_consumption for comp in hardware.software_components])
