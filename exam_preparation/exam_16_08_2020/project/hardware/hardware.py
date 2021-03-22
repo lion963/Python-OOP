@@ -11,21 +11,13 @@ class Hardware:
         self.software_components = []
 
     def install(self, software):
-        if self.capacity < sum([s.capacity_consumption for s in self.software_components]) + software.capacity_consumption \
-                or self.memory < sum([s.memory_consumption for s in self.software_components]) + software.memory_consumption:
+        if self.capacity < sum(
+                [s.capacity_consumption for s in self.software_components]) + software.capacity_consumption \
+                or self.memory < sum(
+            [s.memory_consumption for s in self.software_components]) + software.memory_consumption:
             raise Exception("Software cannot be installed")
         self.software_components.append(software)
 
     def uninstall(self, software: Software):
         if software in self.software_components:
             self.software_components.remove(software)
-
-    @property
-    def type(self):
-        return self.__type
-
-    @type.setter
-    def type(self, value):
-        if not (value == "Heavy" or  value=="Power"):
-            raise Exception('Type must be "Express" or "Light"')
-        self.__type = value
