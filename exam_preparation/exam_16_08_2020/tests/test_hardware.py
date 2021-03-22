@@ -66,32 +66,6 @@ class TestHardware(unittest.TestCase):
         expected_result = [light_software, light_software2]
         self.assertEqual(result, expected_result)
 
-    def test_light_components_count_method(self):
-        params = ['Linux', "Power", 50, 70]
-        hardware = Hardware(*params)
-        light_software = LightSoftware('SSD', 10, 20)
-        light_software2 = LightSoftware('SSD', 10, 20)
-        express_software = ExpressSoftware('HHD', 20, 25)
-        hardware.install(light_software)
-        hardware.install(light_software2)
-        hardware.install(express_software)
-        result = hardware.get_light_software_components_count()
-        expected_result = 2
-        self.assertEqual(result, expected_result)
-
-    def test_express_components_count_method(self):
-        params = ['Linux', "Power", 50, 70]
-        hardware = Hardware(*params)
-        light_software = LightSoftware('SSD', 10, 20)
-        light_software2 = LightSoftware('SSD', 10, 20)
-        express_software = ExpressSoftware('HHD', 20, 25)
-        hardware.install(light_software)
-        hardware.install(light_software2)
-        hardware.install(express_software)
-        result = hardware.get_express_software_components_count()
-        expected_result = 1
-        self.assertEqual(result, expected_result)
-
 
 if __name__ == '__main__':
     unittest.main()
