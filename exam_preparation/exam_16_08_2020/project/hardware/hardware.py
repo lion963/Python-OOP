@@ -6,7 +6,7 @@ class UnsuccessfulInstallException(Exception):
 
 
 class Hardware:
-    def __init__(self, name, type, capacity, memory):
+    def __init__(self, name: str, type: str, capacity: int, memory: int):
         self.name = name
         self.type = type
         self.capacity = capacity
