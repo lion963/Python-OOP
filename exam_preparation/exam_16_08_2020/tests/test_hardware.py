@@ -6,66 +6,96 @@ from exam_preparation.exam_16_08_2020.project.hardware.power_hardware import Pow
 import unittest
 
 
-class HardwareTests(unittest.TestCase):
-    def test_hardwareInit_whenInit_shouldRaise(self):
-        with self.assertRaises(Exception) as context:
-            Hardware('test', 'Heavy', 100, 100)
+class TestHardware(unittest.TestCase):
+    def test_attributes(self):
+        params = ['Linux', "Power", 200, 300]
+        hardware = Hardware(*params)
+        result = [hardware.name, hardware.type, hardware.capacity, hardware.memory, hardware.software_components]
+        expected_result = ['Linux', "Power", 200, 300, []]
+        self.assertListEqual(result, expected_result)
 
-        self.assertIsNotNone(context.exception)
+    def test_install_method(self):
+        params = ['Linux', "Power", 200, 300]
+        hardware = Hardware(*params)
+        light_software = LightSoftware('SSD', 50, 60)
+        express_software = ExpressSoftware('HHD', 60, 70)
+        hardware.install(light_software)
+        hardware.install(express_software)
+        result = hardware.software_components
+        expected_result = [light_software, express_software]
+        self.assertEqual(result, expected_result)
 
-    def test_hardwareHeavyInit_shouldAssignAttributes(self):
-        heavy_hardware = HeavyHardware('test', 100, 100)
+    def test_install_method_raise(self):
+        params = ['Linux', "Power", 200, 300]
+        hardware = Hardware(*params)
+        light_software = LightSoftware('SSD', 100, 150)
+        light_software2 = LightSoftware('SSD', 100, 150)
+        express_software = ExpressSoftware('HHD', 50, 100)
+        hardware.install(light_software)
+        hardware.install(express_software)
+        with self.assertRaises(Exception) as exp:
+            hardware.install(light_software2)
+        self.assertEqual(exp.exception.args[0], "Software cannot be installed")
 
-        self.assertEqual('test', heavy_hardware.name)
-        self.assertEqual('Heavy', heavy_hardware.type)
-        self.assertEqual(200, heavy_hardware.capacity)
-        self.assertEqual(75, heavy_hardware.memory)
-        self.assertListEqual([], heavy_hardware.software_components)
+    def test_uninstall_method(self):
+        params = ['Linux', "Power", 50, 70]
+        hardware = Hardware(*params)
+        light_software = LightSoftware('SSD', 10, 20)
+        light_software2 = LightSoftware('SSD', 10, 20)
+        express_software = ExpressSoftware('HHD', 20, 25)
+        hardware.install(light_software)
+        hardware.install(light_software2)
+        hardware.install(express_software)
+        hardware.uninstall(express_software)
+        result = hardware.software_components
+        expected_result = [light_software, light_software2]
+        self.assertEqual(result, expected_result)
 
-    def test_hardwarePowerInit_shouldAssignAttributes(self):
-        power_hardware = PowerHardware('test', 100, 100)
-
-        self.assertEqual('test', power_hardware.name)
-        self.assertEqual('Power', power_hardware.type)
-        self.assertEqual(25, power_hardware.capacity)
-        self.assertEqual(175, power_hardware.memory)
-        self.assertListEqual([], power_hardware.software_components)
-
-    def test_hardwareInstall_whenEnoughCapacityAndMemory_shouldAppendSoftwareToComponents(self):
-        software = ExpressSoftware('test software', 100, 20)
-        heavy_hardware = HeavyHardware('test', 100, 100)
-
-        heavy_hardware.install(software)
-
-        self.assertListEqual([software], heavy_hardware.software_components)
-
-    def test_hardwareInstall_whenNotEnoughCapacityOrMemory_shouldRaise(self):
-        software = ExpressSoftware('test software', 100, 100)
-        heavy_hardware = HeavyHardware('test', 100, 100)
-
-        with self.assertRaises(Exception) as context:
-            heavy_hardware.install(software)
-
-        self.assertIsNotNone(context.exception)
-        self.assertEqual(str(context.exception), 'Software cannot be installed')
-
-    def test_hardwareUninstall_whenValidSoftware_shouldRemoveFromComponents(self):
-        software = ExpressSoftware('test software', 100, 20)
-        heavy_hardware = HeavyHardware('test', 100, 100)
-        heavy_hardware.install(software)
-
-        heavy_hardware.uninstall(software)
-
-        self.assertListEqual([], heavy_hardware.software_components)
-
-    def test_hardwareUninstall_whenInvalidSoftware_shouldRaise(self):
-        software = ExpressSoftware('test software', 100, 20)
-        heavy_hardware = HeavyHardware('test', 100, 100)
-
-        heavy_hardware.uninstall(software)
-
-        self.assertEqual([], heavy_hardware.software_components)
+    def test_uninstall_method_if_not_in_components(self):
+        params = ['Linux', "Power", 50, 70]
+        hardware = Hardware(*params)
+        light_software = LightSoftware('SSD', 10, 20)
+        light_software2 = LightSoftware('SSD', 10, 20)
+        express_software = ExpressSoftware('HHD', 20, 25)
+        hardware.install(light_software)
+        hardware.install(light_software2)
+        hardware.install(express_software)
+        hardware.uninstall(express_software)
+        hardware.uninstall(express_software)
+        result = hardware.software_components
+        expected_result = [light_software, light_software2]
+        self.assertEqual(result, expected_result)
 
 
 if __name__ == '__main__':
     unittest.main()
+
+
+# class Hardware:
+#     def __init__(self, name, type, capacity, memory):
+#         self.name = name
+#         self.type = type
+#         self.capacity = capacity
+#         self.memory = memory
+#         self.software_components = []
+#
+#     def install(self, software):
+#         if self.can_install(software):
+#             self.software_components.append(software)
+#         else:
+#             raise Exception("Software cannot be installed")
+#
+#     def uninstall(self, software):
+#         self.software_components.remove(software)
+#
+#     def get_light_software_components_count(self):
+#         return len([s for s in self.software_components if s.type == "Light"])
+#
+#     def get_express_software_components_count(self):
+#         return len([s for s in self.software_components if s.type == "Express"])
+#
+#     def can_install(self, software):
+#         has_space = sum([s.capacity_consumption for s in self.software_components]) + software.capacity_consumption <= self.capacity
+#         has_memory = sum([s.memory_consumption for s in self.software_components]) + software.memory_consumption <= self.memory
+#         return has_memory and has_space
+

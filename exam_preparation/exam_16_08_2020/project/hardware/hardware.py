@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 from exam_preparation.exam_16_08_2020.project.software.software import Software
 
 
@@ -6,8 +5,7 @@ class UnsuccessfulInstallException(Exception):
     pass
 
 
-class Hardware(ABC):
-    @abstractmethod
+class Hardware:
     def __init__(self, name, type, capacity, memory):
         self.name = name
         self.type = type
