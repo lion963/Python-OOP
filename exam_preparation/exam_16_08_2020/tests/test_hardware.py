@@ -1,8 +1,6 @@
 from exam_preparation.exam_16_08_2020.project.hardware.hardware import Hardware
 from exam_preparation.exam_16_08_2020.project.software.light_software import LightSoftware
 from exam_preparation.exam_16_08_2020.project.software.express_software import ExpressSoftware
-from exam_preparation.exam_16_08_2020.project.hardware.heavy_hardware import HeavyHardware
-from exam_preparation.exam_16_08_2020.project.hardware.power_hardware import PowerHardware
 import unittest
 
 
