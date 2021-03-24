@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from exam_preparation.exam_preparation_02_04_2020.project.card.card_repository import CardRepository
 
+
 class Player(ABC):
     @abstractmethod
     def __init__(self, username: str, health: int):
@@ -8,33 +9,32 @@ class Player(ABC):
         self.health = health
         self.card_repository: CardRepository = CardRepository()
 
-    def take_damage (self, damage_points: int):
-        if damage_points < 0:
-            raise ValueError("Damage points cannot be less than zero.")
-        self.health -= damage_points
-
-    @property
-    def health(self):
-        return self.__health
-
-    @health.setter
-    def health(self, value):
-        if value < 0:
-            raise ValueError("Player's health bonus cannot be less than zero.")
-        self.__health = value
-
     @property
     def username(self):
-        return self.__username
+        return self._username
 
     @username.setter
     def username(self, value):
         if not value:
             raise ValueError("Player's username cannot be an empty string.")
-        self.__username = value
+        self._username = value
+
+    @property
+    def health(self):
+        return self._health
+
+    @health.setter
+    def health(self, value):
+        if value < 0:
+            raise ValueError("Player's health bonus cannot be less than zero.")
+        self._health = value
 
     @property
     def is_dead(self):
         return self.health <= 0
 
+    def take_damage(self, damage_points: int):
+        if damage_points < 0:
+            raise ValueError('Damage points cannot be less than zero.')
 
+        self.health -= damage_points

@@ -1,29 +1,31 @@
-from exam_preparation.exam_preparation_02_04_2020.project.player.player import Player
 from exam_preparation.exam_preparation_02_04_2020.project.player.beginner import Beginner
+from exam_preparation.exam_preparation_02_04_2020.project.player.player import Player
 
 
-class Battlefield:
+class BattleField:
+    @staticmethod
+    def increase_beginner_attr(player: Beginner):
+        player.health += 40
+
+        for c in player.card_repository.cards:
+            c.damage_points += 30
 
     @staticmethod
-    def is_dead_player(player1, player2):
-        if player1.is_dead or player2.is_dead:
-            return True
-        return False
-
-    @staticmethod
-    def check_if_beginner(player):
-        return isinstance(player, Beginner)
+    def get_bonus_points(player: Player):
+        return sum([c.health_points for c in player.card_repository.cards])
 
     def fight(self, attacker: Player, enemy: Player):
-        players = [attacker, enemy]
-        if self.is_dead_player(attacker, enemy):
-            raise ValueError("Player is dead!")
-        for pl in players:
-            pl.health += sum([card.health_points for card in pl.card_repository.cards])
-            if self.check_if_beginner(pl):
-                pl.health += 40
-                for card in pl.card_repository.cards:
-                    card.damage_points += 30
+        if attacker.is_dead or enemy.is_dead:
+            raise ValueError('Player is dead!')
+
+        if isinstance(attacker, Beginner):
+            self.increase_beginner_attr(attacker)
+
+        if isinstance(enemy, Beginner):
+            self.increase_beginner_attr(enemy)
+
+        attacker.health += self.get_bonus_points(attacker)
+        enemy.health += self.get_bonus_points(enemy)
 
         for card in attacker.card_repository.cards:
             if enemy.is_dead:
