@@ -8,7 +8,6 @@ class Player(ABC):
         self.health = health
         self.card_repository: CardRepository = CardRepository()
 
-    @abstractmethod
     def take_damage (self, damage_points: int):
         if damage_points < 0:
             raise ValueError("Damage points cannot be less than zero.")
