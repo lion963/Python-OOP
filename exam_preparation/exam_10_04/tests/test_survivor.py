@@ -18,7 +18,6 @@ class SurvivorTests(unittest.TestCase):
         survivor = Survivor('test', 23)
         self.assertEqual(23, survivor.age)
 
-
     def test_survivorInit_whenAgeIsInvalid_shouldRaise(self):
         with self.assertRaises(ValueError) as context:
             Survivor('test', -23)
