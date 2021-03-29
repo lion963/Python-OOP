@@ -13,7 +13,6 @@ class Medicine(ABC):
 
     @health_increase.setter
     def health_increase(self, value):
-
         if value < 0:
             raise ValueError('Health increase cannot be less than zero.')
         self._health_increase = value
