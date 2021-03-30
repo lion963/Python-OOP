@@ -4,7 +4,7 @@ from exam_preparation.exam_19_12_2020.project.survivor import Survivor
 
 
 class Medicine(ABC):
-
+    @abstractmethod
     def __init__(self, health_increase: int):
         self.__health_increase = health_increase
 

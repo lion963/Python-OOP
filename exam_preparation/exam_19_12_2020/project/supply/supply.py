@@ -4,7 +4,7 @@ from exam_preparation.exam_19_12_2020.project.survivor import Survivor
 
 
 class Supply(ABC):
-
+    @abstractmethod
     def __init__(self, needs_increase: int):
         self.__needs_increase = needs_increase
 
