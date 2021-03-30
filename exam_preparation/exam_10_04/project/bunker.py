@@ -81,3 +81,5 @@ class Bunker:
             survivor.needs -= survivor.age * 2
             self.sustain(survivor, 'FoodSupply')
             self.sustain(survivor, 'WaterSupply')
+
+
