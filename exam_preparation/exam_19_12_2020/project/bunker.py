@@ -55,27 +55,19 @@ class Bunker:
 
     def heal(self, survivor: Survivor, medicine_type: str):
         if survivor.needs_healing:
-            index_to_remove = None
-            for i in range(len(self.medicine) - 1, -1, -1):
-                if self.medicine[i].__class__.__name__ == medicine_type:
-                    index_to_remove = i
-                    break
-            if index_to_remove:
-                medicine = self.medicine.pop(index_to_remove)
-                medicine.apply(survivor)
-                return f"{survivor.name} healed successfully with {medicine_type}"
+            for med in self.medicine[::-1]:
+                if med.__class__.__name__ == medicine_type:
+                    med.apply(survivor)
+                    self.medicine.remove(med)
+                    return f"{survivor.name} healed successfully with {medicine_type}"
 
     def sustain(self, survivor: Survivor, sustenance_type: str):
         if survivor.needs_sustenance:
-            index_to_remove = None
-            for i in range(len(self.supplies) - 1, -1, -1):
-                if self.supplies[i].__class__.__name__ == sustenance_type:
-                    index_to_remove = i
-                    break
-            if index_to_remove:
-                supply = self.supplies.pop(index_to_remove)
-                supply.apply(survivor)
-                return f"{survivor.name} sustained successfully with {sustenance_type}"
+            for supp in self.supplies:
+                if supp.__class__.__name__ == sustenance_type:
+                    supp.apply(survivor)
+                    self.supplies.remove(supp)
+                    return f"{survivor.name} sustained successfully with {sustenance_type}"
 
     def next_day(self):
         for survivor in self.survivors:
