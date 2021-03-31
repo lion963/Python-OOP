@@ -1,5 +1,5 @@
 import unittest
-from exam_preparation.exam_10_04.project.survivor import Survivor
+from exam_preparation.exam_19_12_2020.project.survivor import Survivor
 
 
 class SurvivorTests(unittest.TestCase):
