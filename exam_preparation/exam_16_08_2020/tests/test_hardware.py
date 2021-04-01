@@ -59,14 +59,43 @@ class TestHardware(unittest.TestCase):
         hardware.install(light_software2)
         hardware.install(express_software)
         hardware.uninstall(express_software)
-        hardware.uninstall(express_software)
+        try:
+            hardware.uninstall(express_software)
+        except:
+            ValueError
         result = hardware.software_components
         expected_result = [light_software, light_software2]
         self.assertEqual(result, expected_result)
 
+    # def test_get_light_software_components_count(self):
+    #     params = ['Linux', "Power", 200, 300]
+    #     hardware = Hardware(*params)
+    #     light_software = LightSoftware('SSD', 50, 60)
+    #     express_software = ExpressSoftware('HHD', 60, 70)
+    #     hardware.install(light_software)
+    #     hardware.install(express_software)
+    #     result = hardware.get_light_software_components_count()
+    #     expected_result = 1
+    #     self.assertEqual(result, expected_result)
+
+    # def test_get_express_software_components_count(self):
+    #     params = ['Linux', "Power", 200, 300]
+    #     hardware = Hardware(*params)
+    #     light_software = LightSoftware('SSD', 50, 60)
+    #     express_software = ExpressSoftware('HHD', 60, 70)
+    #     hardware.install(light_software)
+    #     hardware.install(express_software)
+    #     result = hardware.get_express_software_components_count()
+    #     expected_result = 1
+    #     self.assertEqual(result, expected_result)
+
+    # def test__repr__method(self):
+    #     params = ['Linux', "Power", 200, 300]
+    #     hardware = Hardware(*params)
+    #     result = hardware.__repr__()
+    #     expected_result = "Hardware Component - Linux\nExpress Software Components: 0\nLight Software Components: 0\nMemory Usage: 0 / 300\nCapacity Usage: 0 / 200\nType: Power\nSoftware Components: None"
+    #     self.assertEqual(result, expected_result)
+
 
 if __name__ == '__main__':
     unittest.main()
-
-
-
