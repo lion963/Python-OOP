@@ -54,6 +54,7 @@ class System:
             hardware = [hardware for hardware in System._hardware if hardware.name == hardware_name][0]
             software = [software for software in System._software if software.name == software_name][0]
             hardware.uninstall(software)
+            System._software.remove(software)
         except IndexError as ex:
             return 'Some of the components do not exist'
 
