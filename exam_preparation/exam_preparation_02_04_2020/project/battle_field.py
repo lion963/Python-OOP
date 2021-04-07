@@ -32,6 +32,7 @@ class BattleField:
                 return
             enemy.take_damage(card.damage_points)
 
+
         for card in enemy.card_repository.cards:
             if attacker.is_dead:
                 return
