@@ -74,3 +74,4 @@ class Bunker:
             survivor.needs -= survivor.age * 2
             FoodSupply().apply(survivor)
             WaterSupply().apply(survivor)
+
