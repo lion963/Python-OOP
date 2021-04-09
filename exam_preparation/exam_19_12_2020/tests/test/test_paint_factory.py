@@ -130,5 +130,6 @@ class TestPaintFactory(TestCase):
         self.assertEqual(expected, result)
 
 
+
 if __name__ == '__main__':
     main()
