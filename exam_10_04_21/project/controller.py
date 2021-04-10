@@ -56,12 +56,16 @@ class Controller:
             return f"There isn't a fish of type {fish_type}."
         if fish_type == "FreshwaterFish":
             fish = FreshwaterFish(fish_name, fish_species, price)
-            aquarium[0].add_fish(fish)
+            res=aquarium[0].add_fish(fish)
+            if res:
+                return res
             if fish not in aquarium[0].fish:
                 return f"Water not suitable."
         elif fish_type == "SaltwaterFish":
             fish = SaltwaterFish(fish_name, fish_species, price)
-            aquarium[0].add_fish(fish)
+            res = aquarium[0].add_fish(fish)
+            if res:
+                return res
             if fish not in aquarium[0].fish:
                 return f"Water not suitable."
 
@@ -85,11 +89,5 @@ class Controller:
             result += f"{aquarium.__str__()}\n"
         return result
 
-controller = Controller()
-saqu=SaltwaterAquarium("Salt")
-controller.add_aquarium("SaltwaterAquarium", saqu.name)
-ffish=FreshwaterFish("fresh_fish", "fish", 2.2)
-sfish=SaltwaterFish("salt_fish", "fish", 2.5)
-print(controller.add_fish("Salt", "SaltwaterFish", "salt_fish", "fish", 2.5))
 
 
