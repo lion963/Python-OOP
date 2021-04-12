@@ -86,7 +86,7 @@ class Controller:
     def report(self):
         result = ''
         for aquarium in self.aquariums:
-            result += f"{aquarium.__str__()}\n"
+            result += f"{aquarium.__str__()}"
         return result
 
 

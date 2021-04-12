@@ -56,5 +56,5 @@ class BaseAquarium(ABC):
         else:
             result += f"none\n"
         result += f"Decorations: {len(self.decorations)}\n"
-        result += f"Comfort: {self.calculate_comfort()}"
+        result += f"Comfort: {self.calculate_comfort()}\n"
         return result
