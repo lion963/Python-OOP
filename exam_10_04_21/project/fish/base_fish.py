@@ -40,4 +40,3 @@ class BaseFish(ABC):
 
     def eat(self):
         self.size += 5
-
